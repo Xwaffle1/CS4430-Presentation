@@ -6,13 +6,13 @@ CREATE TABLE Albums (
     albumID INT PRIMARY KEY,
     artistID INT,
     name VARCHAR(50),
-	year INT,
+	  year INT,
     FOREIGN KEY(artistID) REFERENCES 	Artists(artistID));
 );
 CREATE TABLE Songs (
     songID INT PRIMARY KEY,
     albumID INT,
-	trackNum INT,
+	  trackNum INT,
     name VARCHAR(50),
     FOREIGN KEY(albumID) REFERENCES 	Albums(albumID));
 );
