@@ -5,6 +5,10 @@
  * Date: 11/14/2018
  * Time: 8:33 PM
  */
+
+include_once("Song.php");
+
+
 $host = '127.0.0.1';
 $db = 'music';
 $user = 'root';
@@ -18,16 +22,26 @@ $opt = [
 ];
 
 $pdo = new PDO($dsn, $user, $pass, $opt);
+
+$songs = array();
+$artists = array();
+$albums = array();
+
 //if (sizeof($artists) == 0) {
     loadDatabase();
 //}
+
+
+
+
+
 function loadDatabase() {
-    global $products;
-    $products = array();
+    global $songs;
+    $songs = array();
     global $pdo;
-    $stmt = $pdo->prepare("SELECT * FROM `products`");
+    $stmt = $pdo->prepare("SELECT *,albums.name AS albumName,songs.name AS songName FROM songs,albums WHERE songs.albumID=albums.albumID");
     $stmt->execute();
     foreach ($stmt->fetchAll() as $row) {
-        $products[] = new Product($row);
+        $songs[] = new Song($row);
     }
 }

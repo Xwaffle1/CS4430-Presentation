@@ -1,18 +1,22 @@
 CREATE TABLE Artists (
-    artistID INT PRIMARY KEY,
+    artistID INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(50)
 );
 CREATE TABLE Albums (
-    albumID INT PRIMARY KEY,
+    albumID INT PRIMARY KEY AUTO_INCREMENT,
     artistID INT,
     name VARCHAR(50),
 	  year INT,
-    FOREIGN KEY(artistID) REFERENCES 	Artists(artistID));
+    FOREIGN KEY(artistID) REFERENCES 	Artists(artistID)
 );
 CREATE TABLE Songs (
-    songID INT PRIMARY KEY,
+    songID INT PRIMARY KEY AUTO_INCREMENT,
     albumID INT,
 	  trackNum INT,
     name VARCHAR(50),
-    FOREIGN KEY(albumID) REFERENCES 	Albums(albumID));
+    FOREIGN KEY(albumID) REFERENCES 	Albums(albumID)
 );
+
+INSERT INTO artists VALUES(NULL, "Lil Xan");
+INSERT INTO albums VALUES(NULL, 1, "TOTAL XANARCHY", 2018);
+INSERT INTO songs VALUES(NULL, 1, 12, "BETRAYED");

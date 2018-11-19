@@ -10,6 +10,7 @@ class Song {
     public $id;
     public $songName;
     public $albumName;
+    public $albumID;
     public $trackNumber;
 
     /**
@@ -17,9 +18,16 @@ class Song {
      * @param $row
      */
     public function __construct($row) {
+//        foreach ($row as $id) {
+//            echo $id . ",";
+//        }
         $this->id = $row["songID"];
-        $this->songName = $row["name"];
-        $this->albumName = $row["albumID"];
+        $this->songName = $row["songName"];
+        if (isset($row["albumID"]))
+            $this->albumID = $row["albumID"];
+        if (isset($row["albumName"]))
+            $this->albumName = $row["albumName"];
+
         $this->trackNumber = $row["trackNum"];
     }
 
