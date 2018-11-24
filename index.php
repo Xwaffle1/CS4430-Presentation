@@ -14,7 +14,7 @@ if (isset($_GET["Search"])) {
 		
 	$Search = $_GET["Search"];	
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	$pdoQuery = ("SELECT trackNum, songs.name AS songName, albums.name AS albumName FROM songs, albums WHERE songs.name = :Search");
+	$pdoQuery = ("SELECT trackNum, songs.name AS songName, albums.name AS albumName FROM songs, albums WHERE songs.name = :Search AND albums.albumID = songs.albumID");
 	$pdoResult = $pdo->prepare($pdoQuery);
 	
 	$pdoExec = $pdoResult->execute(array(":Search"=>$Search));
@@ -34,7 +34,7 @@ if (isset($_GET["Search"])) {
 		}
 	} 
 	
-	$pdoQuery2 = ("SELECT trackNum, songs.name AS songName, albums.name AS albumName FROM songs, albums WHERE albums.name = :Search");
+	$pdoQuery2 = ("SELECT trackNum, songs.name AS songName, albums.name AS albumName FROM songs, albums WHERE albums.name = :Search AND albums.albumID = songs.albumID");
 	$pdoResult2 = $pdo->prepare($pdoQuery2);
 	$pdoExec2 = $pdoResult2->execute(array(":Search"=>$Search));
 	
@@ -53,7 +53,7 @@ if (isset($_GET["Search"])) {
 		}
 	}
 	
-	$pdoQuery2 = ("SELECT trackNum, songs.name AS songName, albums.name AS albumName FROM songs, albums, artists WHERE artists.name = :Search");
+	$pdoQuery2 = ("SELECT trackNum, songs.name AS songName, albums.name AS albumName FROM songs, albums, artists WHERE artists.name = :Search AND albums.albumID = songs.albumID AND artists.artistID = albums.artistID");
 	$pdoResult2 = $pdo->prepare($pdoQuery2);
 	$pdoExec2 = $pdoResult2->execute(array(":Search"=>$Search));
 	
