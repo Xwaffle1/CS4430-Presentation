@@ -9,12 +9,12 @@ if (isset($_GET["Search"])) {
 		
 		echo "<div align='center' class='container mt-3'>";
 		echo "<table border='4' cellpadding='10'>";
-		echo "<tr><td colspan='4' align='center'>Song Listings</td></tr>";
-		echo "<th>Track #</th><th colspan='2'>Song Name</th><th colspan='2'>Album Name</th>";
+		echo "<tr><td colspan='6' align='center'>Song Listings</td></tr>";
+		echo "<th>Track #</th><th colspan='2'>Song Name</th><th colspan='2'>Artist Name</th><th colspan='2'>Album Name</th>";
 		
 	$Search = $_GET["Search"];	
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	$pdoQuery = ("SELECT trackNum, songs.name AS songName, albums.name AS albumName FROM songs, albums WHERE songs.name = :Search AND albums.albumID = songs.albumID");
+	$pdoQuery = ("SELECT trackNum, songs.name AS songName, albums.name AS albumName, artists.name AS artist FROM songs, albums, artists WHERE songs.name = :Search AND albums.albumID = songs.albumID AND albums.artistID = artists.artistID");
 	$pdoResult = $pdo->prepare($pdoQuery);
 	
 	$pdoExec = $pdoResult->execute(array(":Search"=>$Search));
@@ -25,48 +25,54 @@ if (isset($_GET["Search"])) {
 				$trackNum = $row['trackNum'];
 				$songName = $row['songName'];
 				$albumName = $row['albumName'];
+				$artist = $row['artist'];
     
 				echo "<tr>
 					<td>$trackNum</td>
 					<td colspan='2'>$songName</td>
+					<td colspan='2'>$artist</td>
 					<td colspan='2'>$albumName</td>
 				</tr>";	
 		}
 	} 
 	
-	$pdoQuery2 = ("SELECT trackNum, songs.name AS songName, albums.name AS albumName FROM songs, albums WHERE albums.name = :Search AND albums.albumID = songs.albumID");
-	$pdoResult2 = $pdo->prepare($pdoQuery2);
-	$pdoExec2 = $pdoResult2->execute(array(":Search"=>$Search));
+	$pdoQuery = ("SELECT trackNum, songs.name AS songName, albums.name AS albumName, artists.name AS artist FROM songs, albums, artists WHERE albums.name = :Search AND albums.albumID = songs.albumID AND albums.artistID = artists.artistID");
+	$pdoResult = $pdo->prepare($pdoQuery);
+	$pdoExec = $pdoResult->execute(array(":Search"=>$Search));
 	
-	if ($pdoExec2) {
-		foreach($pdoResult2 as $row2){
+	if ($pdoExec) {
+		foreach($pdoResult as $row){
 			
-				$trackNum = $row2['trackNum'];
-				$songName = $row2['songName'];
-				$albumName = $row2['albumName'];
+				$trackNum = $row['trackNum'];
+				$songName = $row['songName'];
+				$albumName = $row['albumName'];
+				$artist = $row['artist'];
     
 				echo "<tr>
 					<td>$trackNum</td>
 					<td colspan='2'>$songName</td>
+					<td colspan='2'>$artist</td>
 					<td colspan='2'>$albumName</td>
 				</tr>";		
 		}
 	}
 	
-	$pdoQuery2 = ("SELECT trackNum, songs.name AS songName, albums.name AS albumName FROM songs, albums, artists WHERE artists.name = :Search AND albums.albumID = songs.albumID AND artists.artistID = albums.artistID");
-	$pdoResult2 = $pdo->prepare($pdoQuery2);
-	$pdoExec2 = $pdoResult2->execute(array(":Search"=>$Search));
+	$pdoQuery = ("SELECT trackNum, songs.name AS songName, albums.name AS albumName, artists.name AS artist FROM songs, albums, artists WHERE artists.name = :Search AND albums.albumID = songs.albumID AND artists.artistID = albums.artistID");
+	$pdoResult = $pdo->prepare($pdoQuery);
+	$pdoExec = $pdoResult->execute(array(":Search"=>$Search));
 	
-	if ($pdoExec2) {
-		foreach($pdoResult2 as $row2){
+	if ($pdoExec) {
+		foreach($pdoResult as $row){
 			
-				$trackNum = $row2['trackNum'];
-				$songName = $row2['songName'];
-				$albumName = $row2['albumName'];
+				$trackNum = $row['trackNum'];
+				$songName = $row['songName'];
+				$albumName = $row['albumName'];
+				$artist = $row['artist'];
 			
 				echo "<tr>
 					<td>$trackNum</td>
 					<td colspan='2'>$songName</td>
+					<td colspan='2'>$artist</td>
 					<td colspan='2'>$albumName</td>
 				</tr>";	
 		}
