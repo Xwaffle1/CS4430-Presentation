@@ -9,26 +9,17 @@
 class Song {
     public $id;
     public $songName;
-    public $albumName;
-    public $albumID;
-    public $trackNumber;
+    public $artistID;
+    public $trackNumber; // Used for Album Track #
 
     /**
      * Song constructor.
      * @param $row
      */
     public function __construct($row) {
-//        foreach ($row as $id) {
-//            echo $id . ",";
-//        }
         $this->id = $row["songID"];
-        $this->songName = $row["songName"];
-        if (isset($row["albumID"]))
-            $this->albumID = $row["albumID"];
-        if (isset($row["albumName"]))
-            $this->albumName = $row["albumName"];
-
+        $this->songName = $row["name"];
+        $this->artistID = $row["artistID"];
         $this->trackNumber = $row["trackNum"];
     }
-
 }

@@ -1,24 +1,81 @@
 <?php
 
 include "index.html";
-include "database.php";
+include_once "database.php";
 
 if (isset($_GET["Search"])) {
     echo "<h3> Searching for \"" . $_GET['Search'] . "\"</h3>";
 
     echo "<div align='center' class='container mt-3'>";
 
+    if (!empty($_GET['artists'])) {
+        echo "<h4> Artists</h4>";
 
-    echo "<table border='4' cellpadding='10'>";
-    echo "<tr><td colspan='4' align='center'>Song Listings</td></tr>";
-    echo "<th>Track #</th><th colspan='2'>Song Name</th><th colspan='2'>Album Name</th>";
-    foreach ($songs as $song) {
-        echo "<tr>
-                <td>$song->trackNumber</td>
-                <td colspan='2'>$song->songName</td>
-                <td colspan='2'>$song->albumName</td>
-             </tr>";
+        $searched = $_GET['Search'];
+        $allRows = getArtists($searched);
+
+        if (sizeof($allRows) > 0) {
+            echo "<table border='4' cellpadding='10'>";
+            echo "<th align='center'>Artist ID</th><th align='center'>Artist Name</th>";
+            foreach ($allRows as $key => $artistData) {
+                $artistName = $artistData["name"];
+                $artistID = $artistData["artistID"];
+                echo "<tr> <td>$artistID</td><td align='center'><a href='#'>$artistName</a></td></tr>";
+            }
+            echo "</table>";
+        } else {
+            echo "<h5>No Artists matching...</h5>";
+        }
     }
-    echo "</table>";
+
+    if (!empty($_GET['albums'])) {
+        echo "<h4> Albums</h4>";
+
+        $searched = $_GET['Search'];
+        $allRows = getAlbums($searched);
+
+        if (sizeof($allRows) > 0) {
+            echo "<table border='4' cellpadding='10'>";
+            echo "<th align='center'>Album ID</th><th align='center'>Album Name</th>";
+            foreach ($allRows as $key => $albumData) {
+                $albumName = $albumData["name"];
+                $albumID = $albumData["albumID"];
+                echo "<tr> <td>$albumID</td><td align='center'><a href='#'>$albumName</a></td></tr>";
+            }
+            echo "</table>";
+        } else {
+            echo "<h5>No Albums matching...</h5>";
+        }
+    }
+
+    if (!empty($_GET['songs'])) {
+        echo "<h4> Songs</h4>";
+
+        $searched = $_GET['Search'];
+        $allRows = getSongs($searched);
+
+        if (sizeof($allRows) > 0) {
+            echo "<table border='4' cellpadding='10'>";
+            echo "<th align='center'>Song ID</th><th align='center'>Song Name</th><th>Album ID</th><th>Album Track #</th><th>Artist ID</th>";
+            foreach ($allRows as $key => $songData) {
+                $songName = $songData["name"];
+                $songID = $songData["songID"];
+                $albumID = $songData["albumID"];
+                if ($albumID == null) {
+                    $albumID = "--";
+                }
+                $artistID = $songData["artistID"];
+                $trackNum = $songData["trackNum"];
+                if ($trackNum == null) {
+                    $trackNum = 1;
+                }
+                echo "<tr> <td>$songID</td><td align='center'><a href='#'>$songName</a></td><td>$albumID</td><td>$trackNum</td><td>$artistID</td></tr>";
+            }
+            echo "</table>";
+        } else {
+            echo "<h5>No Songs matching...</h5>";
+        }
+    }
+
     echo "</div>";
 }
