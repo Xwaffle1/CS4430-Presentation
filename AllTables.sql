@@ -39,6 +39,10 @@ INSERT INTO artists VALUES(NULL, "Logic"); -- 10
 INSERT INTO albums VALUES(NULL, (SELECT artistID FROM Artists WHERE name="Lil Xan"), "TOTAL XANARCHY", 2018);
 INSERT INTO albums VALUES(NULL, (SELECT artistID FROM Artists WHERE name="Post Malone"), "beerbongs & bentleys", 2018);
 INSERT INTO albums VALUES(NULL, (SELECT artistID FROM Artists WHERE name="Post Malone"), "Stoney (Deluxe)", 2016);
+INSERT INTO albums VALUES(NULL, (SELECT artistID FROM Artists WHERE name="Drake"), "Scorpion", 2018);
+INSERT INTO albums VALUES(NULL, (SELECT artistID FROM Artists WHERE name="Drake"), "More Life", 2017);
+INSERT INTO albums VALUES(NULL, (SELECT artistID FROM Artists WHERE name="Drake"), "Views", 2016);
+INSERT INTO albums VALUES(NULL, (SELECT artistID FROM Artists WHERE name="Drake"), "If You're Reading This It's Too Late", 2013);
 
 
 
@@ -100,6 +104,13 @@ INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE name="Stoney (D
 INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE name="Stoney (Deluxe)"), (SELECT artistID FROM Artists WHERE name="Post Malone"), 16, "Hit This Hard");
 INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE name="Stoney (Deluxe)"), (SELECT artistID FROM Artists WHERE name="Post Malone"), 17, "Money Made Me Do It");
 INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE name="Stoney (Deluxe)"), (SELECT artistID FROM Artists WHERE name="Post Malone"), 18, "Feeling Whitney");
+-- Drake Scorpion Album
+INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE name="Scorpion"), (SELECT artistID FROM Artists WHERE name="Drake"), 2, "Nonstop");
+INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE name="Scorpion"), (SELECT artistID FROM Artists WHERE name="Drake"), 5, "God's Plan");
+
+INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE name="More Life"), (SELECT artistID FROM Artists WHERE name="Drake"), 3, "Passionfruit");
+INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE name="More Life"), (SELECT artistID FROM Artists WHERE name="Drake"), 20, "Fake Love");
+
 
 
 
