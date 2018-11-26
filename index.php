@@ -8,6 +8,9 @@ if (isset($_GET["Search"])) {
 
     echo "<div align='center' class='container mt-3'>";
 
+
+    $displayed = array();
+
     if (!empty($_GET['artists'])) {
         echo "<h4> Artists</h4>";
 
@@ -20,7 +23,8 @@ if (isset($_GET["Search"])) {
             foreach ($allRows as $key => $artistData) {
                 $artistName = $artistData["name"];
                 $artistID = $artistData["artistID"];
-                echo "<tr> <td>$artistID</td><td align='center'><a href='#'>$artistName</a></td></tr>";
+                echo "<tr> <td>$artistID</td><td align='center'><a href='artist.php?id=$artistID'>$artistName</a></td></tr>";
+                $displayed[] = $artistName;
             }
             echo "</table>";
         } else {
@@ -40,7 +44,8 @@ if (isset($_GET["Search"])) {
             foreach ($allRows as $key => $albumData) {
                 $albumName = $albumData["name"];
                 $albumID = $albumData["albumID"];
-                echo "<tr> <td>$albumID</td><td align='center'><a href='#'>$albumName</a></td></tr>";
+                echo "<tr> <td>$albumID</td><td align='center'><a href='album.php?id=$albumID'>$albumName</a></td></tr>";
+                $displayed[] = $albumName;
             }
             echo "</table>";
         } else {
@@ -56,7 +61,7 @@ if (isset($_GET["Search"])) {
 
         if (sizeof($allRows) > 0) {
             echo "<table border='4' cellpadding='10'>";
-            echo "<th align='center'>Song ID</th><th align='center'>Song Name</th><th>Album ID</th><th>Album Track #</th><th>Artist ID</th>";
+            echo "<th align='center'>Song ID</th><th align='center'>Song Name</th><th>Album Name</th><th>Track #</th><th>Artist Name</th>";
             foreach ($allRows as $key => $songData) {
                 $songName = $songData["name"];
                 $songID = $songData["songID"];
@@ -69,7 +74,7 @@ if (isset($_GET["Search"])) {
                 if ($trackNum == null) {
                     $trackNum = 1;
                 }
-                echo "<tr> <td>$songID</td><td align='center'><a href='#'>$songName</a></td><td>$albumID</td><td>$trackNum</td><td>$artistID</td></tr>";
+                echo "<tr> <td>$songID</td><td align='center'>$songName</td><td>" . getAlbumFromID($albumID) . "</td><td>$trackNum</td><td>" . getArtistFromID($artistID) . "</td></tr>";
             }
             echo "</table>";
         } else {

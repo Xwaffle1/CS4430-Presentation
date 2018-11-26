@@ -121,3 +121,19 @@ function getSongs($searchFor) {
 //    }
     return $rows;
 }
+
+function getArtistFromID($artistID) {
+    global $pdo;
+    $stmt = $pdo->prepare("SELECT name FROM artists WHERE artistID=$artistID;");
+    $stmt->execute();
+    $row = $stmt->fetch();
+    return $row['name'];
+}
+
+function getAlbumFromID($albumID) {
+    global $pdo;
+    $stmt = $pdo->prepare("SELECT name FROM albums WHERE albumID=$albumID;");
+    $stmt->execute();
+    $row = $stmt->fetch();
+    return $row['name'];
+}
