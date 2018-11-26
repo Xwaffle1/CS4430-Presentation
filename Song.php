@@ -18,7 +18,7 @@ class Song {
      */
     public function __construct($row) {
         $this->id = $row["songID"];
-        $this->songName = $row["name"];
+        $this->songName = $row["songName"];
         $this->artistID = $row["artistID"];
         $this->trackNumber = $row["trackNum"];
     }

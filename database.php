@@ -50,7 +50,7 @@ function loadArtists() {
     $stmt = $pdo->prepare("SELECT * FROM artists");
     $stmt->execute();
     foreach ($stmt->fetchAll() as $row) {
-        $artists[$row["artistID"]] = $row["name"];
+        $artists[$row["artistID"]] = $row["artistName"];
     }
 }
 
@@ -64,7 +64,7 @@ function loadSongs() {
     $stmt->execute();
     foreach ($stmt->fetchAll() as $row) {
         $artistID = $row['artistID'];
-        $artistStmt = $pdo->prepare("SELECT name FROM artists WHERE artistID = $artistID");
+        $artistStmt = $pdo->prepare("SELECT artistName FROM artists WHERE artistID = $artistID");
         $artistStmt->execute();
         $artistName = $artistStmt->fetchColumn(1);
         $newSong = new Song($row);
@@ -79,7 +79,7 @@ function addSongToAlbum($song) {
 
 function getArtists($searchFor) {
     global $pdo;
-    $stmt = $pdo->prepare("SELECT * FROM Artists WHERE UPPER(name) = UPPER(\"$searchFor\") OR UPPER(name) LIKE UPPER(\"%$searchFor%\");");
+    $stmt = $pdo->prepare("SELECT * FROM Artists WHERE UPPER(artistName) = UPPER(\"$searchFor\") OR UPPER(artistName) LIKE UPPER(\"%$searchFor%\");");
 //    echo "SELECT * FROM Artists WHERE UPPER(name) = UPPER(\"$searchFor\") OR UPPER(name) LIKE UPPER(\"%$searchFor%\");";
     $stmt->execute();
     $rows = $stmt->fetchAll();
@@ -94,7 +94,7 @@ function getArtists($searchFor) {
 
 function getAlbums($searchFor) {
     global $pdo;
-    $stmt = $pdo->prepare("SELECT * FROM Albums WHERE UPPER(name) = UPPER(\"$searchFor\") OR UPPER(name) LIKE UPPER(\"%$searchFor%\");");
+    $stmt = $pdo->prepare("SELECT * FROM Albums WHERE UPPER(albumName) = UPPER(\"$searchFor\") OR UPPER(albumName) LIKE UPPER(\"%$searchFor%\");");
 //    echo "SELECT * FROM Artists WHERE UPPER(name) = UPPER(\"$searchFor\") OR UPPER(name) LIKE UPPER(\"%$searchFor%\");";
     $stmt->execute();
     $rows = $stmt->fetchAll();
@@ -109,7 +109,7 @@ function getAlbums($searchFor) {
 
 function getSongs($searchFor) {
     global $pdo;
-    $stmt = $pdo->prepare("SELECT * FROM Songs WHERE UPPER(name) = UPPER(\"$searchFor\") OR UPPER(name) LIKE UPPER(\"%$searchFor%\");");
+    $stmt = $pdo->prepare("SELECT * FROM Songs WHERE UPPER(songName) = UPPER(\"$searchFor\") OR UPPER(songName) LIKE UPPER(\"%$searchFor%\");");
 //    echo "SELECT * FROM Artists WHERE UPPER(name) = UPPER(\"$searchFor\") OR UPPER(name) LIKE UPPER(\"%$searchFor%\");";
     $stmt->execute();
     $rows = $stmt->fetchAll();
@@ -122,18 +122,32 @@ function getSongs($searchFor) {
     return $rows;
 }
 
+function getSongsFromArtistOrAlbum($searchFor) {
+    global $pdo;
+    $stmt = $pdo->prepare("SELECT * FROM Songs,Albums WHERE Songs.artistID = Albums.artistID AND (Songs.albumID = NULL OR Songs.albumID = Albums.albumID) AND (UPPER(albumName) = UPPER(\"" . $searchFor . "\") OR UPPER(albumName) LIKE UPPER(\"%" . $searchFor . "%\"))");
+    $stmt->execute();
+    $rows = $stmt->fetchAll();
+
+    $stmt = $pdo->prepare("SELECT * FROM Songs,Artists WHERE Songs.artistID = Artists.artistID  AND (UPPER(artistName) = UPPER(\"" . $searchFor . "\") OR UPPER(artistName) LIKE UPPER(\"%" . $searchFor . "%\"))");
+    $stmt->execute();
+    $rows = array_merge($stmt->fetchAll(), $rows);
+    return $rows;
+}
+
 function getArtistFromID($artistID) {
     global $pdo;
-    $stmt = $pdo->prepare("SELECT name FROM artists WHERE artistID=$artistID;");
+    $stmt = $pdo->prepare("SELECT artistName FROM artists WHERE artistID = $artistID;");
     $stmt->execute();
     $row = $stmt->fetch();
-    return $row['name'];
+    return $row['artistName'];
 }
 
 function getAlbumFromID($albumID) {
+    if($albumID == "--") return;
+
     global $pdo;
-    $stmt = $pdo->prepare("SELECT name FROM albums WHERE albumID=$albumID;");
+    $stmt = $pdo->prepare("SELECT albumName FROM albums WHERE albumID=$albumID;");
     $stmt->execute();
     $row = $stmt->fetch();
-    return $row['name'];
+    return $row['albumName'];
 }
