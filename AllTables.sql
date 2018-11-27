@@ -32,6 +32,8 @@ INSERT INTO artists VALUES(NULL, "Migos"); --  7
 INSERT INTO artists VALUES(NULL, "Lil Pump"); --  8
 INSERT INTO artists VALUES(NULL, "Kendrick Lamar"); --  9
 INSERT INTO artists VALUES(NULL, "Logic"); --  10
+INSERT INTO artists VALUES(NULL, "J. Cole"); -- 11
+INSERT INTO artists VALUES(NULL, "Blackbear"); -- 12
 
 
 
@@ -58,7 +60,10 @@ INSERT INTO albums VALUES(NULL, (SELECT artistID FROM Artists WHERE artistName="
 INSERT INTO albums VALUES(NULL, (SELECT artistID FROM Artists WHERE artistName="Logic"), "YSIV", 2018);
 INSERT INTO albums VALUES(NULL, (SELECT artistID FROM Artists WHERE artistName="Logic"), "Bobby Tarantino II", 2018);
 INSERT INTO albums VALUES(NULL, (SELECT artistID FROM Artists WHERE artistName="Logic"), "Everybody", 2017);
-
+INSERT INTO albums VALUES(NULL, (SELECT artistID FROM Artists WHERE artistName="J. Cole"), "2014 Forest Hills Drive", 2014);
+INSERT INTO albums VALUES(NULL, (SELECT artistID FROM Artists WHERE artistName="J. Cole"), "Born Sinner (Deluxe Version)", 2013);
+INSERT INTO albums VALUES(NULL, (SELECT artistID FROM Artists WHERE artistName="Blackbear"), "digital druglord", 2017);
+INSERT INTO albums VALUES(NULL, (SELECT artistID FROM Artists WHERE artistName="Blackbear"), "Deadroses", 2015);
 
 
 --  Album SONGS
@@ -431,7 +436,64 @@ INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName="Ever
 INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName="Everybody"), (SELECT artistID FROM Artists WHERE artistName="Logic"), 11, "Anziety (feat. Lucy Rose)");
 INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName="Everybody"), (SELECT artistID FROM Artists WHERE artistName="Logic"), 12, "Black SpiderMan (feat. Damian Lemar Hudson)");
 INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName="Everybody"), (SELECT artistID FROM Artists WHERE artistName="Logic"), 13, "AfricAryaN (feat. Neil deGrasse Tyson)");
-
+--  J. Cole 2014 Forest Hill Drive
+INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName="2014 Forest Hill Drive"), (SELECT artistID FROM Artists WHERE artistName="J. Cole"), 1, "Intro");
+INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName="2014 Forest Hill Drive"), (SELECT artistID FROM Artists WHERE artistName="J. Cole"), 2, "January 28th");
+INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName="2014 Forest Hill Drive"), (SELECT artistID FROM Artists WHERE artistName="J. Cole"), 3, "Wet Dreamz");
+INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName="2014 Forest Hill Drive"), (SELECT artistID FROM Artists WHERE artistName="J. Cole"), 4, "03' Adolescence");
+INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName="2014 Forest Hill Drive"), (SELECT artistID FROM Artists WHERE artistName="J. Cole"), 5, "A Tale of 2 Cities");
+INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName="2014 Forest Hill Drive"), (SELECT artistID FROM Artists WHERE artistName="J. Cole"), 6, "Fire Squad");
+INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName="2014 Forest Hill Drive"), (SELECT artistID FROM Artists WHERE artistName="J. Cole"), 7, "St. Tropez");
+INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName="2014 Forest Hill Drive"), (SELECT artistID FROM Artists WHERE artistName="J. Cole"), 8, "G.O.M.D.");
+INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName="2014 Forest Hill Drive"), (SELECT artistID FROM Artists WHERE artistName="J. Cole"), 9, "No Role Modelz");
+INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName="2014 Forest Hill Drive"), (SELECT artistID FROM Artists WHERE artistName="J. Cole"), 10, "Hello");
+INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName="2014 Forest Hill Drive"), (SELECT artistID FROM Artists WHERE artistName="J. Cole"), 11, "Apparently");
+INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName="2014 Forest Hill Drive"), (SELECT artistID FROM Artists WHERE artistName="J. Cole"), 12, "Love Yourz");
+INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName="2014 Forest Hill Drive"), (SELECT artistID FROM Artists WHERE artistName="J. Cole"), 13, "Note to Self");
+--  J. Cole Born Sinner (Deluxe Version)
+INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName="Born Sinner (Deluxe Version)"), (SELECT artistID FROM Artists WHERE artistName="J. Cole"), 1, "Villuminati");
+INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName="Born Sinner (Deluxe Version)"), (SELECT artistID FROM Artists WHERE artistName="J. Cole"), 2, "Kerney Sermon (Skit)");
+INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName="Born Sinner (Deluxe Version)"), (SELECT artistID FROM Artists WHERE artistName="J. Cole"), 3, "LAnd of the Snakes");
+INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName="Born Sinner (Deluxe Version)"), (SELECT artistID FROM Artists WHERE artistName="J. Cole"), 4, "Power Trip (feat. Miguel)");
+INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName="Born Sinner (Deluxe Version)"), (SELECT artistID FROM Artists WHERE artistName="J. Cole"), 5, "Mo Money (interlude)");
+INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName="Born Sinner (Deluxe Version)"), (SELECT artistID FROM Artists WHERE artistName="J. Cole"), 6, "Trouble");
+INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName="Born Sinner (Deluxe Version)"), (SELECT artistID FROM Artists WHERE artistName="J. Cole"), 7, "Runaway");
+INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName="Born Sinner (Deluxe Version)"), (SELECT artistID FROM Artists WHERE artistName="J. Cole"), 8, "She Knows (feat. Amber Coffman & Cults)");
+INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName="Born Sinner (Deluxe Version)"), (SELECT artistID FROM Artists WHERE artistName="J. Cole"), 9, "Rich N****z");
+INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName="Born Sinner (Deluxe Version)"), (SELECT artistID FROM Artists WHERE artistName="J. Cole"), 10, "Where's Jermaine (skit)");
+INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName="Born Sinner (Deluxe Version)"), (SELECT artistID FROM Artists WHERE artistName="J. Cole"), 11, "Forbidden Fruit (feat. Kendrick Lamar)");
+INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName="Born Sinner (Deluxe Version)"), (SELECT artistID FROM Artists WHERE artistName="J. Cole"), 12, "Chaining Day");
+INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName="Born Sinner (Deluxe Version)"), (SELECT artistID FROM Artists WHERE artistName="J. Cole"), 13, "Ain't That Some Sh*t (Interlude)");
+INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName="Born Sinner (Deluxe Version)"), (SELECT artistID FROM Artists WHERE artistName="J. Cole"), 14, "Crooked Smile (feat. TLC)");
+INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName="Born Sinner (Deluxe Version)"), (SELECT artistID FROM Artists WHERE artistName="J. Cole"), 15, "Let Nas Down");
+INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName="Born Sinner (Deluxe Version)"), (SELECT artistID FROM Artists WHERE artistName="J. Cole"), 16, "Born Sinner (feat. @Fauntleroy)");
+INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName="Born Sinner (Deluxe Version)"), (SELECT artistID FROM Artists WHERE artistName="J. Cole"), 17, "Miss America");
+INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName="Born Sinner (Deluxe Version)"), (SELECT artistID FROM Artists WHERE artistName="J. Cole"), 18, "New York Times (feat. 50 cent & Bas)");
+INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName="Born Sinner (Deluxe Version)"), (SELECT artistID FROM Artists WHERE artistName="J. Cole"), 19, "Is She Gon Pop");
+INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName="Born Sinner (Deluxe Version)"), (SELECT artistID FROM Artists WHERE artistName="J. Cole"), 20, "N****z Know");
+INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName="Born Sinner (Deluxe Version)"), (SELECT artistID FROM Artists WHERE artistName="J. Cole"), 21, "Sparks Will Fly (feat. Jhene Aiko)");
+--  Blackbear digital druglord
+INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName="digital druglord"), (SELECT artistID FROM Artists WHERE artistName="Blackbear"), 1, "hell is where i dreamt of u and woke up alone");
+INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName="digital druglord"), (SELECT artistID FROM Artists WHERE artistName="Blackbear"), 2, "moodz (feat. 24Hrs)");
+INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName="digital druglord"), (SELECT artistID FROM Artists WHERE artistName="Blackbear"), 3, "i miss the old u");
+INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName="digital druglord"), (SELECT artistID FROM Artists WHERE artistName="Blackbear"), 4, "do re mi");
+INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName="digital druglord"), (SELECT artistID FROM Artists WHERE artistName="Blackbear"), 5, "wish u the best (feat. Stalking Gia)");
+INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName="digital druglord"), (SELECT artistID FROM Artists WHERE artistName="Blackbear"), 6, "juicy sweatsuits (feat. Juicy J)");
+INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName="digital druglord"), (SELECT artistID FROM Artists WHERE artistName="Blackbear"), 7, "double");
+INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName="digital druglord"), (SELECT artistID FROM Artists WHERE artistName="Blackbear"), 8, "if i could i would feel nothing");
+INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName="digital druglord"), (SELECT artistID FROM Artists WHERE artistName="Blackbear"), 9, "chateau");
+INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName="digital druglord"), (SELECT artistID FROM Artists WHERE artistName="Blackbear"), 10, "make daddy proud");
+--  Blackbear digital Deadroses
+INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName="Deadroses"), (SELECT artistID FROM Artists WHERE artistName="Blackbear"), 1, "4U");
+INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName="Deadroses"), (SELECT artistID FROM Artists WHERE artistName="Blackbear"), 2, "I Needed You");
+INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName="Deadroses"), (SELECT artistID FROM Artists WHERE artistName="Blackbear"), 3, "Ain't Trippin");
+INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName="Deadroses"), (SELECT artistID FROM Artists WHERE artistName="Blackbear"), 4, "90210 (feat. G-Eazy)");
+INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName="Deadroses"), (SELECT artistID FROM Artists WHERE artistName="Blackbear"), 5, "Ain't Love");
+INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName="Deadroses"), (SELECT artistID FROM Artists WHERE artistName="Blackbear"), 6, "Idfc");
+INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName="Deadroses"), (SELECT artistID FROM Artists WHERE artistName="Blackbear"), 7, "Waste Away");
+INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName="Deadroses"), (SELECT artistID FROM Artists WHERE artistName="Blackbear"), 8, "Dirty Laundry");
+INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName="Deadroses"), (SELECT artistID FROM Artists WHERE artistName="Blackbear"), 9, "My Heart Is Lost");
+INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName="Deadroses"), (SELECT artistID FROM Artists WHERE artistName="Blackbear"), 10, "Deadroses");
 
 
 
