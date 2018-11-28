@@ -49,7 +49,9 @@ if (isset($_GET["id"])){
                 }
                 if (!in_array($songID, $songsDisplayed)) {
                     $songsDisplayed[] = $songID;
-                    echo "<tr> <td align='center'>$songName</td><td>" . getAlbumFromID($albumID) . "</td><td>$trackNum</td><td>" . getArtistFromID($artistID) . "</td></tr>";
+                    $albumName = getAlbumFromID($albumID) ;
+                    $artistName = getArtistFromID($artistID);
+                    echo "<tr><td align='center'>$songName</td><td><a href='album.php?id=$albumID'>$albumName</a></td><td>$trackNum</td><td><a href='artist.php?id=$artistID'>$artistName</a></td></tr>";
                 }
             }
             echo "</table>";

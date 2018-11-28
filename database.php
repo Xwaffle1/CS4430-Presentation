@@ -142,12 +142,94 @@ function getArtistFromID($artistID) {
     return $row['artistName'];
 }
 
+function getAlbumsFromArtistID($artistID) {
+    global $pdo;
+    $stmt = $pdo->prepare("SELECT * FROM Albums WHERE artistID = $artistID;");
+    $stmt->execute();
+    $row = $stmt->fetchAll();
+    return $row;
+
+}
+
 function getAlbumFromID($albumID) {
-    if($albumID == "--") return;
+    if ($albumID == "--") return;
 
     global $pdo;
     $stmt = $pdo->prepare("SELECT albumName FROM albums WHERE albumID=$albumID;");
     $stmt->execute();
     $row = $stmt->fetch();
     return $row['albumName'];
+}
+
+function getAllArtists() {
+    global $pdo;
+    $stmt = $pdo->prepare("SELECT artistName FROM artists;");
+    $stmt->execute();
+    return $stmt->fetchAll();
+}
+
+function getAllAlbums() {
+    global $pdo;
+    $stmt = $pdo->prepare("SELECT albumName FROM Albums;");
+    $stmt->execute();
+    return $stmt->fetchAll();
+}
+
+function getAllAlbumsData() {
+    global $pdo;
+    $stmt = $pdo->prepare("SELECT * FROM Albums;");
+    $stmt->execute();
+    return $stmt->fetchAll();
+}
+
+
+function getAllSongs() {
+    global $pdo;
+    $stmt = $pdo->prepare("SELECT songName FROM Songs;");
+    $stmt->execute();
+    return $stmt->fetchAll();
+}
+
+function artistExists($searchFor) {
+    global $pdo;
+    $stmt = $pdo->prepare("SELECT * FROM Artists WHERE UPPER(artistName) = UPPER(\"$searchFor\");");
+    $stmt->execute();
+    $rows = $stmt->fetchAll();
+    return sizeof($rows) > 0;
+}
+
+function albumExists($searchFor) {
+    global $pdo;
+    $stmt = $pdo->prepare("SELECT * FROM Albums WHERE UPPER(albumName) = UPPER(\"$searchFor\");");
+    $stmt->execute();
+    $rows = $stmt->fetchAll();
+    return sizeof($rows) > 0;
+}
+
+function addArtist($artistName) {
+    global $pdo;
+    $stmt = $pdo->prepare("INSERT INTO Artists VALUE(NULL, ?);");
+    $stmt->bindParam(1, $artistName);
+    $stmt->execute();
+}
+
+function addAlbum($albumName, $artist, $year) {
+    if (artistExists($artist)) {
+        global $pdo;
+        $stmt = $pdo->prepare("INSERT INTO albums VALUES(NULL, (SELECT artistID FROM Artists WHERE artistName=\"$artist\"), ?, ?);");
+        $stmt->bindParam(1, $albumName);
+        $stmt->bindParam(2, $year);
+        $stmt->execute();
+    }
+}
+
+function addSong($songName, $albumName, $artistName, $track) {
+    if (artistExists($artistName) && albumExists($albumName)) {
+        global $pdo;
+        $stmt = $pdo->prepare("INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName=\"$albumName\"), (SELECT artistID FROM Artists WHERE artistName=\"$artistName\"), $track, ?);");
+        $stmt->bindParam(1, $songName);
+        $stmt->execute();
+    } else {
+        echo "ERROR ADDING SONG, ALBUM OR ARTIST DOES NOT EXIST.";
+    }
 }

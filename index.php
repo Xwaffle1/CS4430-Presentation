@@ -40,11 +40,12 @@ if (isset($_GET["Search"])) {
 
         if (sizeof($allRows) > 0) {
             echo "<table border='4' cellpadding='10'>";
-            echo "<th align='center'>Album ID</th><th align='center'>Album Name</th>";
+            echo "<th align='center'>Album ID</th><th align='center'>Album Name</th><th>Year</th>";
             foreach ($allRows as $key => $albumData) {
                 $albumName = $albumData["albumName"];
                 $albumID = $albumData["albumID"];
-                echo "<tr> <td>$albumID</td><td align='center'><a href='album.php?id=$albumID'>$albumName</a></td></tr>";
+                $albumYear = $albumData["year"];
+                echo "<tr> <td>$albumID</td><td align='center'><a href='album.php?id=$albumID'>$albumName</a></td><td>$albumYear</td></tr>";
                 $displayed[] = $albumName;
             }
             echo "</table>";
@@ -83,7 +84,9 @@ if (isset($_GET["Search"])) {
                 }
                 if (!in_array($songID, $songsDisplayed)) {
                     $songsDisplayed[] = $songID;
-                    echo "<tr> <td>$songID</td><td align='center'>$songName</td><td>" . getAlbumFromID($albumID) . "</td><td>$trackNum</td><td>" . getArtistFromID($artistID) . "</td></tr>";
+                    $albumName = getAlbumFromID($albumID) ;
+                    $artistName = getArtistFromID($artistID);
+                    echo "<tr> <td>$songID</td><td align='center'>$songName</td><td><a href='album.php?id=$albumID'>$albumName</a></td><td>$trackNum</td><td><a href='artist.php?id=$artistID'>$artistName</a></td></tr>";
                 }
             }
             echo "</table>";
