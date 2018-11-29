@@ -224,9 +224,13 @@ function addAlbum($albumName, $artist, $year) {
 }
 
 function addSong($songName, $albumName, $artistName, $track) {
-    if (artistExists($artistName) && albumExists($albumName)) {
+    if (artistExists($artistName) && (albumExists($albumName) || strcmp($albumName, "NONE") == 0)) {
         global $pdo;
-        $stmt = $pdo->prepare("INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName=\"$albumName\"), (SELECT artistID FROM Artists WHERE artistName=\"$artistName\"), $track, ?);");
+        if (strcmp($albumName, "NONE") == 0) {
+            $stmt = $pdo->prepare("INSERT INTO songs VALUES(NULL, NULL, (SELECT artistID FROM Artists WHERE artistName=\"$artistName\"), $track, ?);");
+        } else {
+            $stmt = $pdo->prepare("INSERT INTO songs VALUES(NULL, (SELECT albumID FROM Albums WHERE albumName=\"$albumName\"), (SELECT artistID FROM Artists WHERE artistName=\"$artistName\"), $track, ?);");
+        }
         $stmt->bindParam(1, $songName);
         $stmt->execute();
     } else {
